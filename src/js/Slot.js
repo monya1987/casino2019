@@ -6,19 +6,19 @@ export default class Slot {
     Symbol.preload();
 
     this.currentSymbols = [
-      ['death_star', 'death_star', 'death_star'],
-      ['death_star', 'death_star', 'death_star'],
-      ['death_star', 'death_star', 'death_star'],
-      ['death_star', 'death_star', 'death_star'],
-      ['death_star', 'death_star', 'death_star'],
+      ['slot1', 'slot1', 'slot1'],
+      ['slot1', 'slot1', 'slot1'],
+      ['slot1', 'slot1', 'slot1'],
+      ['slot1', 'slot1', 'slot1'],
+      ['slot1', 'slot1', 'slot1'],
     ];
 
     this.nextSymbols = [
-      ['death_star', 'death_star', 'death_star'],
-      ['death_star', 'death_star', 'death_star'],
-      ['death_star', 'death_star', 'death_star'],
-      ['death_star', 'death_star', 'death_star'],
-      ['death_star', 'death_star', 'death_star'],
+      ['slot1', 'slot1', 'slot1'],
+      ['slot1', 'slot1', 'slot1'],
+      ['slot1', 'slot1', 'slot1'],
+      ['slot1', 'slot1', 'slot1'],
+      ['slot1', 'slot1', 'slot1'],
     ]
 
     this.container = domElement;
@@ -36,16 +36,29 @@ export default class Slot {
   }
 
   spin() {
+    var revard;
     this.onSpinStart();
 
     this.currentSymbols = this.nextSymbols;
-    this.nextSymbols = [
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-      [Symbol.random(), Symbol.random(), Symbol.random()],
-    ];
+
+    if (revard) {
+      this.nextSymbols = [
+        ['slot1', 'slot1', Symbol.random()],
+        ['slot1', 'slot1', 'slot1'],
+        ['slot1', 'slot1', 'slot1'],
+        ['slot1', 'slot1', 'slot1'],
+        ['slot1', 'slot1', 'slot1'],
+      ];
+    } else {
+      this.nextSymbols = [
+        [Symbol.random(), Symbol.random(), Symbol.random()],
+        [Symbol.random(), Symbol.random(), Symbol.random()],
+        [Symbol.random(), Symbol.random(), Symbol.random()],
+        [Symbol.random(), Symbol.random(), Symbol.random()],
+        [Symbol.random(), Symbol.random(), Symbol.random()],
+      ];
+    }
+
 
     return Promise.all(this.reels.map(reel => {
       reel.renderSymbols(this.currentSymbols[reel.idx], this.nextSymbols[reel.idx]);
