@@ -6,29 +6,31 @@ export default class Slot {
     Symbol.preload();
 
     this.currentSymbols = [
-      ['slot1', 'slot1', 'slot1'],
-      ['slot1', 'slot1', 'slot1'],
-      ['slot1', 'slot1', 'slot1'],
-      ['slot1', 'slot1', 'slot1'],
-      ['slot1', 'slot1', 'slot1'],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
     ];
 
     this.nextSymbols = [
-      ['slot1', 'slot1', 'slot1'],
-      ['slot1', 'slot1', 'slot1'],
-      ['slot1', 'slot1', 'slot1'],
-      ['slot1', 'slot1', 'slot1'],
-      ['slot1', 'slot1', 'slot1'],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
+      [Symbol.random(), Symbol.random(), Symbol.random()],
     ]
 
+    this.counter = 0;
     this.container = domElement;
 
     this.reels = Array.from(this.container.getElementsByClassName('reel')).map((reelContainer, idx) => new Reel(reelContainer, idx, this.currentSymbols[idx]));
 
     this.spinButton = document.getElementById('spin');
+    this.errAlert = document.getElementById('errAlert');
+    this.succAlert = document.getElementById('succAlert');
     this.spinButton.addEventListener('click', () => this.spin());
 
-    this.autoPlayCheckbox = document.getElementById('autoplay');
 
     if (config.inverted) {
       this.container.classList.add('inverted');
@@ -36,18 +38,17 @@ export default class Slot {
   }
 
   spin() {
-    var revard;
     this.onSpinStart();
 
     this.currentSymbols = this.nextSymbols;
 
-    if (revard) {
+    if (this.counter > 1) {
       this.nextSymbols = [
-        ['slot1', 'slot1', Symbol.random()],
-        ['slot1', 'slot1', 'slot1'],
-        ['slot1', 'slot1', 'slot1'],
-        ['slot1', 'slot1', 'slot1'],
-        ['slot1', 'slot1', 'slot1'],
+        [Symbol.random(), 'slot1', Symbol.random()],
+        [Symbol.random(), 'slot1', Symbol.random()],
+        [Symbol.random(), 'slot1', Symbol.random()],
+        [Symbol.random(), 'slot1', Symbol.random()],
+        [Symbol.random(), 'slot1', Symbol.random()],
       ];
     } else {
       this.nextSymbols = [
@@ -67,6 +68,7 @@ export default class Slot {
   }
 
   onSpinStart() {
+    document.getElementById('shadow').style.display = 'none';
     this.spinButton.disabled = true;
 
     console.log('SPIN START');
@@ -74,9 +76,12 @@ export default class Slot {
 
   onSpinEnd() {
     this.spinButton.disabled = false;
-
+    this.counter++;
+    if (this.counter > 2) {
+      this.succAlert.style.display = 'block';
+    } else {
+      this.errAlert.style.display = 'block';
+    }
     console.log('SPIN END');
-
-    //if (this.autoPlayCheckbox.checked) return window.setTimeout(() => this.spin(), 200);
   }
 }

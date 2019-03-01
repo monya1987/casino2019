@@ -11,6 +11,8 @@
   </head>
   <body>
     <div id="shadow" onclick="hideShadow()"></div>
+    <div id="errAlert" onclick="hideAlert()"></div>
+    <div id="succAlert" onclick="redirect()"></div>
     <div class="header">
       <div id="slot">
         <div id="reels">
@@ -25,9 +27,12 @@
 
     <button type="button" id="spin"></button>
     <script>
-      function hideShadow() {
-          var shadow = document.getElementById('shadow');
-          shadow.remove();
+      function hideAlert() {
+        var shadow = document.getElementById('errAlert');
+        shadow.style.display = 'none';
+      }
+      function redirect() {
+        FbPlayableAd.onCTAClick()
       }
     </script>
   </body>
