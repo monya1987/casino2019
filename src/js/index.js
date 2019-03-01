@@ -1,3 +1,5 @@
+import "@babel/polyfill";
+
 import Slot from './Slot.js';
 
 const config = {
