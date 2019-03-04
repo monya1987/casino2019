@@ -42,7 +42,7 @@ export default class Slot {
 
     this.currentSymbols = this.nextSymbols;
 
-    if (this.counter > 1) {
+    if (this.counter >= 1) {
       this.nextSymbols = [
         [Symbol.random(), 'slot1', Symbol.random()],
         [Symbol.random(), 'slot1', Symbol.random()],
