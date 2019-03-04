@@ -68,8 +68,10 @@ export default class Slot {
   }
 
   onSpinStart() {
-    document.getElementById('shadow').style.display = 'none';
-    this.spinButton.disabled = true;
+      document.getElementById('shadow').style.display = 'none';
+      this.succAlert.style.display = 'none';
+      this.errAlert.style.display = 'none';
+      this.spinButton.disabled = true;
 
     console.log('SPIN START');
   }
@@ -77,7 +79,7 @@ export default class Slot {
   onSpinEnd() {
     this.spinButton.disabled = false;
     this.counter++;
-    if (this.counter > 2) {
+    if (this.counter > 1) {
       this.succAlert.style.display = 'block';
     } else {
       this.errAlert.style.display = 'block';
