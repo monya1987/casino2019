@@ -131,7 +131,6 @@ body {
         height: 305px;
         padding: 0 12px;
         margin-top: -30px;
-        margin-left: 30px;
     }
 }
 @media only screen and (max-width: 600px) and (orientation: landscape) {
@@ -145,7 +144,6 @@ body {
         height: 270px;
         padding: 0 8px;
         margin-top: -30px;
-        margin-left: 30px;
     }
 }
 
